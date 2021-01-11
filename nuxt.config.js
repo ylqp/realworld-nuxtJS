@@ -4,6 +4,7 @@
 
  module.exports = {
      router: {
+        linkExactActiveClass: 'active',
         extendRoutes (routes, resolve) {
             console.log(routes)
             // 清空默认生成路由
@@ -34,6 +35,16 @@
                             path: '/profile/:username?',
                             name: 'profile',
                             component: resolve(__dirname, 'pages/profile/')
+                        },
+                        {
+                            path: '/editor',
+                            name: 'editor',
+                            component: resolve(__dirname, 'pages/editor/')
+                        },
+                        {
+                            path: '/settings',
+                            name: 'settings',
+                            component: resolve(__dirname, 'pages/settings/')
                         },
                     ]
                 }
