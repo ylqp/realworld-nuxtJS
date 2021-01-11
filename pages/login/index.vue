@@ -18,17 +18,18 @@
                 <form @submit.prevent="onSubmit">
                 <fieldset class="form-group" v-if="!isLogin"> 
                     <input 
-                    class="form-control form-control-lg" type="text" placeholder="Your Name">
+                        v-model="user.username"
+                        class="form-control form-control-lg" type="text" placeholder="Your Name" required>
                 </fieldset>
                 <fieldset class="form-group">
                     <input 
                         v-model="user.email"
-                        class="form-control form-control-lg" type="text" placeholder="Email">
+                        class="form-control form-control-lg" type="email" placeholder="Email" required>
                 </fieldset>
                 <fieldset class="form-group">
                     <input 
                         v-model="user.password"
-                        class="form-control form-control-lg" type="password" placeholder="Password">
+                        class="form-control form-control-lg" type="password" placeholder="Password" required minlength="8">
                 </fieldset>
                 <button class="btn btn-lg btn-primary pull-xs-right">
                     {{ isLogin? 'Sign in' : 'Sign up' }}
@@ -42,7 +43,8 @@
 </template>
 
 <script>
-import request from '@/utils/request'
+// import request from '@/utils/request'
+import {login, register} from '@/api/user'
 export default {
     name: 'LoginIndex',
     computed: {
@@ -53,21 +55,19 @@ export default {
     data () {
         return {
             user: {
+                username: '',
                 email: '',
                 password: ''
-            }
+            },
+            errors: {},//错误信息
         }
     },
     methods: {
         async onSubmit () {
             // 
-            const { data } = await request({
-                method: 'POST',
-                url: '/api/users/login',
-                data: {
-                    "user": JSON.stringify(this.user)
-                }
-            })
+            const { data } = this.isLogin
+            ? await login(this.user)
+            : await register(this.user)
             console.log(data)
             // 保存用户的登录状态
 
