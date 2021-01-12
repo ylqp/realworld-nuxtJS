@@ -45,6 +45,7 @@
 <script>
 // import request from '@/utils/request'
 import {login, register} from '@/api/user'
+const Cookie = process.client ? require('js-cookie') : undefind //process.client 为nuxt特有
 export default {
     name: 'LoginIndex',
     computed: {
@@ -70,7 +71,9 @@ export default {
             : await register(this.user)
             console.log(data)
             // 保存用户的登录状态
-
+            this.$store.commit('setUser', data.user)
+            // 防止刷新页面数据丢失 把数据持久化
+            Cookie.set('user', data.user)
             // 跳转到首页
             this.$router.push('/')
         }
