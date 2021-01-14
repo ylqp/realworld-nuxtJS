@@ -45,8 +45,9 @@
 <script>
 // import request from '@/utils/request'
 import {login, register} from '@/api/user'
-const Cookie = process.client ? require('js-cookie') : undefind //process.client 为nuxt特有
+const Cookie = process.client ? require('js-cookie') : undefined //process.client 为nuxt特有
 export default {
+    middleware: ['not-auth'],
     name: 'LoginIndex',
     computed: {
         isLogin () {
@@ -67,7 +68,7 @@ export default {
         async onSubmit () {
             // 
             const { data } = this.isLogin
-            ? await login(this.user)
+            ? await login({user: this.user})
             : await register(this.user)
             console.log(data)
             // 保存用户的登录状态

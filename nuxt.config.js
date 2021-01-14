@@ -6,7 +6,7 @@
      router: {
         linkExactActiveClass: 'active',
         extendRoutes (routes, resolve) {
-            console.log(routes)
+            // console.log(routes)
             // 清空默认生成路由
             routes.splice(0)
             // 自己设置路由
@@ -53,7 +53,7 @@
         }
      },
      server: {
-         host: '',
+         host: '0.0.0.0',
          port: 3214
      }
  }

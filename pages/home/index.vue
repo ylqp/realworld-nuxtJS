@@ -85,8 +85,13 @@
 </template>
 
 <script>
+import {getArticles} from '@/api/article'
 export default {
-    name: 'HomeIndex'
+    name: 'HomeIndex',
+    async asyncData() {
+        const { data } = await getArticles()
+        return data
+    },
 }
 </script>
 
