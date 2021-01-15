@@ -69,7 +69,7 @@ export default {
             // 
             const { data } = this.isLogin
             ? await login({user: this.user})
-            : await register(this.user)
+            : await register({user: this.user})
             console.log(data)
             // 保存用户的登录状态
             this.$store.commit('setUser', data.user)

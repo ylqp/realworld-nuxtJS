@@ -3,7 +3,7 @@
     <!-- 顶部导航栏 -->
     <nav class="navbar navbar-light">
       <div class="container">
-        <a class="navbar-brand" href="index.html">conduit哈哈</a>
+        <a class="navbar-brand" href="index.html">conduit</a>
         <ul class="nav navbar-nav pull-xs-right">
           <li class="nav-item">
             <!-- Add "active" class when you're on that page" -->
@@ -51,7 +51,7 @@
     <!-- 底部 -->
     <footer>
       <div class="container">
-        <a href="/" class="logo-font">conduit1111111111112</a>
+        <a href="/" class="logo-font">conduit</a>
         <span class="attribution">
           An interactive learning project from
           <a href="https://thinkster.io">Thinkster</a>. Code &amp; design
