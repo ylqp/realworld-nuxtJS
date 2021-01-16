@@ -1,5 +1,5 @@
 const cookieparser = process.server ? require('cookieparser') :undefined
-
+const Cookie = process.client ? require('js-cookie') : undefined //process.client 为nuxt特有
 export const state = () => {
     return {
         // 当前
@@ -10,6 +10,10 @@ export const state = () => {
 export const mutations = {
     setUser (state, data) {
         state.user = data
+    },
+    clearUser (state) {
+        state.user = null
+        Cookie.set('user', null)
     }
 }
 

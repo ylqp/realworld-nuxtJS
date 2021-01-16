@@ -39,11 +39,21 @@
                 :key="article.sulg"
                 >
                 <div class="article-meta">
-                    <nuxt-link :to="`/profile/${article.author.username}`">
-                        <img src="article.author.image" />
+                    <nuxt-link :to="{
+                        name: 'profile',
+                        params: {
+                            username: article.author.username
+                        }
+                    }">
+                        <img :src="article.author.image" />
                     </nuxt-link>
                     <div class="info">
-                        <nuct-link class="author" :to="`/profile/${article.author.username}`">
+                        <nuct-link class="author" :to="{
+                            name: 'profile',
+                            params: {
+                                username: article.author.username
+                            }
+                        }">
                             {{article.author.username}}
                         </nuct-link>
                         <span class="date">{{article.createdAt}}</span>
@@ -64,6 +74,9 @@
                     <p>{{article.description}}</p>
                     <span>Read more...</span>
                 </nuxt-link>
+            </div>
+            <div class="article-preview" v-show="!articles.length">
+                No articles are here... yet.
             </div>
         </div>
         <!-- 分页 -->
@@ -114,7 +127,7 @@
 </template>
 
 <script>
-import {getArticles} from '@/api/article'
+import {getArticles,getYourFeedArticles} from '@/api/article'
 import {getTags} from '@/api/tag'
 import { mapState } from 'vuex'
 export default {
@@ -122,10 +135,12 @@ export default {
     async asyncData( { query } ) {
         
         const limit = 20
-        const offset = Number.parseInt(query.page || 1)
-        const { data } = await getArticles({
+        const page = Number.parseInt(query.page || 1)
+        const tab = query.tab || 'global_feed'
+        const loadArticles = tab === 'global_feed' ? getArticles : getYourFeedArticles
+        const { data } = await loadArticles({
             limit: limit,
-            offset: offset
+            offset: (page - 1) * limit
         })
         const { data: tagData } = await getTags()
         // return data

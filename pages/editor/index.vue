@@ -45,8 +45,10 @@ export default {
         }
     },
     methods: {
-        addArticle () {
-            createArticle({ article:this.article })
+        async addArticle () {
+            const {data} = await createArticle({ article:this.article })
+            console.log(data.article)
+            this.$router.push(`/article/${data.article.slug}`)
         }
     }
 }

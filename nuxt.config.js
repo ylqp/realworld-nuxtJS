@@ -60,5 +60,8 @@
      server: {
          host: '0.0.0.0',
          port: 3214
-     }
+     },
+     plugins: [
+         '~/plugins/request.js'
+     ]
  }
