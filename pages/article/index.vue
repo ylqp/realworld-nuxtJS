@@ -4,13 +4,13 @@
         <div class="banner">
             <div class="container">
 
-            <h1>How to build webapps that scale</h1>
+            <h1>{{article.title}}</h1>
 
             <div class="article-meta">
-                <a href=""><img src="http://i.imgur.com/Qr71crq.jpg" /></a>
+                <a href=""><img :src="article.author.image" /></a>
                 <div class="info">
-                <a href="" class="author">Eric Simons</a>
-                <span class="date">January 20th</span>
+                <a href="" class="author">{{ article.author.username }}</a>
+                <span class="date">{{ article.createdAt }}</span>
                 </div>
                 <button class="btn btn-sm btn-outline-secondary">
                 <i class="ion-plus-round"></i>
@@ -121,8 +121,15 @@
     </div>
 </template>
 <script>
+import { getArticle } from '@/api/article'
+
 export default {
-    name: 'articlePage'
+    name: 'articleIndex',
+    async asyncData ({ params }) {
+        const {data} = await getArticle(params.slug)
+        const { article } = data
+        return {article}
+    }
 }
 </script>
 <style>

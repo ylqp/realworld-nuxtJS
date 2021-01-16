@@ -46,6 +46,11 @@
                             name: 'settings',
                             component: resolve(__dirname, 'pages/settings/')
                         },
+                        {
+                            path: '/article/:slug',
+                            name: 'article',
+                            component: resolve(__dirname, 'pages/article/')
+                        },
                     ]
                 }
             ])
